@@ -10,6 +10,8 @@ RUN mvn dependency:go-offline && mvn package
 
 # Copy the rest of the application source code
 COPY src/ .
+# Copy the .git directory into the image
+COPY .git /app/.git
 
 # Stage 2: Create the final image
 FROM node:14-alpine
