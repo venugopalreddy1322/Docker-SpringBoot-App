@@ -8,5 +8,5 @@ RUN mvn clean package
 FROM openjdk:11
 WORKDIR /app
 COPY --from=build /app/target/devops-automation.jar /app/
-EXPOSE 8000
+EXPOSE 8080
 CMD ["java", "-jar", "devops-automation.jar"]
