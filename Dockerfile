@@ -6,12 +6,10 @@ WORKDIR /app
 COPY pom.xml .
 
 # Download dependencies (if changed) and build the project
-RUN mvn dependency:go-offline && mvn package
+RUN mvn clean package
 
 # Copy the rest of the application source code
-COPY src/ .
-# Copy the .git directory into the image
-COPY .git /app/.git
+COPY . .
 
 # Stage 2: Create the final image
 FROM node:14-alpine
