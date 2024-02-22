@@ -21,7 +21,7 @@ pipeline {
             }
             post {
                 success {
-                    echo "Build completed Success"
+                    echo "Build completed Successfully"
                     echo "Archiving artifacts"
                     archiveArtifacts artifacts: '**/*.jar'
                 }
