@@ -23,7 +23,7 @@ pipeline {
         stage('Push Image to DockerHub Repository') {
             steps {
                 script {
-                    docker.withRegistry(" ", ${DOCKER_REGISTRY_CREDENTIALS})
+                    docker.withRegistry(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", url: 'https://index.docker.io/v1/')
                     dockerImage.push()
                 }
             }
