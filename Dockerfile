@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY pom.xml .
 COPY src src
-# Copy the .git directory into the image
+# Copy the .git directory into the image as required by the application
 COPY .git /app/.git
 RUN mvn clean package
 

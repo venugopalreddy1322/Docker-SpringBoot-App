@@ -24,6 +24,7 @@ pipeline {
         stage('Push Image to DockerHub Repository') {
             steps {
                 script {
+                    // To use the method withRegistry need to validate the script permission in ManageJenkins
                     //docker.withRegistry(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", url: 'https://index.docker.io/v1/')
                     withCredentials([string(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", variable: 'dockerhubpwd')]) {
                         sh 'docker login -u ${DOCKER_USER_NAME} -p ${dockerhubpwd}'

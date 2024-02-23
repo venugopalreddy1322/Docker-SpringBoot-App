@@ -2,30 +2,47 @@ pipeline {
     agent any
     tools {
         maven "MAVEN3"
-        jdk "OracleJDK11"
     }
     stages {
-        stage('Fetch code') {
+        stage('Fetch from GitHub') {
             steps {
-                git branch: 'main', url: 'https://github.com/venugopalreddy1322/Docker-SpringBoot-App'
+                script {
+                    git branch: 'main', url: 'https://github.com/venugopalreddy1322/Docker-SpringBoot-App'
+                }
             }
         }
-        stage('Test') {
+        stage('Test teh project') {
             steps {
                 sh 'mvn test'
             }
         }
-        stage('Build') {
+        stage('Build artifact') {
             steps {
                 sh 'mvn clean install -DskipTests'
             }
-            post {
-                success {
-                    sh echo "Build completed Successfully"
-                    //echo "Archiving artifacts"
-                    archiveArtifacts artifacts: '**/*.jar'
+        }
+        stage('Build Docker image from Dockerfile') {
+            steps {
+                script {
+                    dockerImage = docker.build("venu1322/docker-spring-boot-helloworld-app:Jenkins.${BUILD_ID}")
+                }
+                
+            }
+        }
+        stage('Push image to DockerHub') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'docker_pwd', variable: 'dockerhubpwd')]) {
+                            // some block
+                    sh 'docker login -u venu1322 -p ${dockerhubpwd}'     
+                        
+                    }
+                    //sh 'docker push ${dockerImage}'
+                    dockerImage.push()
                 }
             }
         }
+        
     }
+    
 }
