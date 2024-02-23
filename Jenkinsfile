@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY_CREDENTIALS = 'dockerhubid'
         DOCKER_IMAGE_NAME = 'venu1322/Jenkins-docker-springboot-helloworld-app'
-        DOCKER_IMAGE_TAG = 'V${BUILD_ID}'
+        DOCKER_IMAGE_TAG = "V${BUILD_ID}"
     }
     stages {
         stage('Fetch code from GitRepository') {
@@ -23,7 +23,7 @@ pipeline {
         stage('Push Image to DockerHub Repository') {
             steps {
                 script {
-                    docker.withRegistry("https://hub.docker.com/venu1322",${DOCKER_REGISTRY_CREDENTIALS})
+                    docker.withRegistry(" ",${DOCKER_REGISTRY_CREDENTIALS})
                     dockerImage.push()
                 }
             }
