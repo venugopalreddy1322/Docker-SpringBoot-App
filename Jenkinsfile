@@ -24,7 +24,9 @@ pipeline {
             steps {
                 script {
                     //docker.withRegistry(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", url: 'https://index.docker.io/v1/')
-                    withCredentials([string(credentialsId: 'docker_pwd', variable: 'dockerhubpwd')])
+                    withCredentials([string(credentialsId: 'docker_pwd', variable: 'dockerhubpwd')]) {
+                        sh 'docker login -u venu1322 -p ${dockerhubpwd}'
+                    }
                     dockerImage.push()
                 }
             }
