@@ -1,29 +1,30 @@
 pipeline {
     agent any
-    tools {
-        maven "MAVEN3"
-        jdk "OracleJDK11"
+    environment {
+        DOCKER_REGISTRY_CREDENTIALS = 'dockerhubid'
+        DOCKER_IMAGE_NAME = 'venu1322/Jenkins-docker-springboot-helloworld-app'
+        DOCKER_IMAGE_TAG = 'V${BUILD_ID}'
     }
     stages {
-        stage('Fetch code') {
+        stage('Fetch code from GitRepository') {
             steps {
-                git branch: 'main', url: 'https://github.com/venugopalreddy1322/Docker-SpringBoot-App'
+                script {
+                    git branch: 'main', url: 'https://github.com/venugopalreddy1322/Docker-SpringBoot-App'
+                }
             }
         }
-        stage('Test') {
+        stage('Build Image using Dockerfile') {
             steps {
-                sh 'mvn test'
+                script {
+                    dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_NAME}")
+                }
             }
         }
-        stage('Build') {
+        stage('Push Image to DockerHub Repository') {
             steps {
-                sh 'mvn clean install -DskipTests'
-            }
-            post {
-                success {
-                    sh echo "Build completed Successfully"
-                    //echo "Archiving artifacts"
-                    archiveArtifacts artifacts: '**/*.jar'
+                script {
+                    docker.withRegistry("https://hub.docker.com/venu1322",${DOCKER_REGISTRY_CREDENTIALS})
+                    dockerImage.push()
                 }
             }
         }
