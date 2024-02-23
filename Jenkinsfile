@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_REGISTRY_CREDENTIALS = 'dockerhubid'
-        DOCKER_IMAGE_NAME = 'venu1322/Jenkins-docker-springboot-helloworld-app'
+        DOCKER_IMAGE_NAME = 'venu1322/jenkins-docker-springboot-helloworld-app'
         DOCKER_IMAGE_TAG = "V${BUILD_ID}"
     }
     stages {
