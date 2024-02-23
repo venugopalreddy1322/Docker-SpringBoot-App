@@ -9,7 +9,7 @@ pipeline {
         stage('Fetch code from GitRepository') {
             steps {
                 script {
-                    git branch: 'main', url: 'https://github.com/venugopalreddy1322/Docker-SpringBoot-App'
+                    git branch: 'main', url: 'https://github.com/venugopalreddy1322/Docker-SpringBoot-App.git'
                 }
             }
         }
