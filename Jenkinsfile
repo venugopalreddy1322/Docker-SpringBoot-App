@@ -1,7 +1,8 @@
 pipeline {
     agent any
     environment {
-        DOCKER_REGISTRY_CREDENTIALS = 'dockerhubid'
+        DOCKER_USER_NAME = 'venu1322'
+        DOCKER_REGISTRY_CREDENTIALS = 'docker_pwd'
         DOCKER_IMAGE_NAME = 'venu1322/jenkins-docker-springboot-helloworld-app'
         DOCKER_IMAGE_TAG = "V${BUILD_ID}"
     }
@@ -24,8 +25,8 @@ pipeline {
             steps {
                 script {
                     //docker.withRegistry(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", url: 'https://index.docker.io/v1/')
-                    withCredentials([string(credentialsId: 'docker_pwd', variable: 'dockerhubpwd')]) {
-                        sh 'docker login -u venu1322 -p ${dockerhubpwd}'
+                    withCredentials([string(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", variable: 'dockerhubpwd')]) {
+                        sh 'docker login -u ${DOCKER_USER_NAME} -p ${dockerhubpwd}'
                     }
                     dockerImage.push()
                 }
