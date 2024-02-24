@@ -1,7 +1,7 @@
 # devops-automation Project
 Description:
 A simple jenkins pipeline:
-1.  which fetches the code from Git Repository as developers commits changes to the application code.
+1.  which fetches the code from Git Repository whenever developers commits changes to the application code.
 2.  Integratiion test and build the artifact using Maven
 3.  The built docker image pushed to DockerHub registry.
 
