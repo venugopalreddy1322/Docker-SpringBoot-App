@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        docker "myDocker"
+        dockerTool "myDocker"
     }
     environment {
         DOCKER_USER_NAME = 'venu1322'
