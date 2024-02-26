@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_USER_NAME = 'venu1322'
         DOCKER_REGISTRY_CREDENTIALS = 'docker_pwd'
-        DOCKER_IMAGE_NAME = 'venu1322/jenkins-docker-springboot-helloworld-app'
+        DOCKER_IMAGE_NAME = 'venu1322/project_jenkins-docker-springboot-helloworld-app'
         DOCKER_IMAGE_TAG = "V${BUILD_ID}"
     }
     stages {
