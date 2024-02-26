@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        docker "myDocker"
+    }
     environment {
         DOCKER_USER_NAME = 'venu1322'
         DOCKER_REGISTRY_CREDENTIALS = 'docker_pwd'
