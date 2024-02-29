@@ -29,7 +29,7 @@ pipeline {
                 script {
                     // To use the method withRegistry need to validate the script permission in ManageJenkins
                     //docker.withRegistry(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", url: 'https://index.docker.io/v1/')
-                    withCredentials([string(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", variable: 'dockerhubpwd')]) {
+                    withCredentials([string(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", variable: 'dockerhub_pwd')]) {
                         sh 'docker login -u ${DOCKER_USER_NAME} -p ${dockerhub_pwd}'
                     }
                     dockerImage.push()
