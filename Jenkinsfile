@@ -1,11 +1,11 @@
 pipeline {
     agent any
-    tools {
+    /*tools {
         dockerTool "myDocker"
-    }
+    }*/
     environment {
         DOCKER_USER_NAME = 'venu1322'
-        DOCKER_REGISTRY_CREDENTIALS = 'docker_pwd'
+        DOCKER_REGISTRY_CREDENTIALS = 'dockerhub_pwd'
         DOCKER_IMAGE_NAME = 'venu1322/project_jenkins-docker-springboot-helloworld-app'
         DOCKER_IMAGE_TAG = "V${BUILD_ID}"
     }
@@ -13,7 +13,7 @@ pipeline {
         stage('Fetch code from GitRepository') {
             steps {
                 script {
-                    git branch: 'main', url: 'https://github.com/venugopalreddy1322/Docker-SpringBoot-App'
+                    git branch: 'main', url: 'https://github.com/venugopalreddy1322/Project-Docker-SpringBoot-App'
                 }
             }
         }
